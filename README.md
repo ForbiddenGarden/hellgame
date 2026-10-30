@@ -72,8 +72,8 @@ serialize). Clients poll `/api/state` (500ms during a live clue, 1-1.5s otherwis
 holding an SSE stream. Static files come from `public/`, routes are in `vercel.json`.
 
 1. Import the GitHub repo in Vercel (framework: Other; no build command).
-2. Storage tab: add **Upstash Redis** from the Marketplace. It injects `KV_REST_API_URL` and
-   `KV_REST_API_TOKEN` (the code also accepts `UPSTASH_REDIS_REST_URL/TOKEN`).
+2. Storage tab: add a Redis from the Marketplace. Either Upstash (REST: `KV_REST_API_URL` and
+   `KV_REST_API_TOKEN`) or a plain `REDIS_URL` (redis:// or rediss://) both work. With neither, production errors out on purpose.
 3. Settings, Environment Variables: set `HOST_KEY` to a strong secret.
 4. Domains: add `hellgame.sasquatch.sh`; at GoDaddy add `CNAME hellgame -> cname.vercel-dns.com`.
 5. Open `/host`, sign in, and run a dry run. **Reset everything** (bottom of the host panel after
