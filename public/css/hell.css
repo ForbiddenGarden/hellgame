@@ -1,0 +1,72 @@
+/* $hellgame — shared styles. Phosphor green + blood red + pumpkin on near-black. */
+:root {
+  --bg: #04070a;
+  --panel: #0a1210;
+  --panel2: #0e1a16;
+  --line: #17352a;
+  --green: #3dff6e;
+  --green-dim: #1f9a43;
+  --blood: #e5173f;
+  --blood-dim: #7a0f24;
+  --pumpkin: #ff7a1a;
+  --bone: #e9e6d6;
+  --muted: #6e8c7d;
+  --mono: ui-monospace, 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Consolas, 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--bone); font-family: var(--mono); }
+body { min-height: 100vh; -webkit-tap-highlight-color: transparent; }
+button { font: inherit; color: inherit; cursor: pointer; }
+input { font: inherit; color: inherit; }
+a { color: var(--green); }
+
+/* CRT overlay: scanlines + vignette. Add class "crt" to <body>. */
+body.crt::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 900;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,0,0,.22) 3px);
+  mix-blend-mode: multiply;
+}
+body.crt::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 901;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,.7) 100%);
+}
+
+.glow-green { color: var(--green); text-shadow: 0 0 .4em rgba(61,255,110,.55); }
+.glow-blood { color: var(--blood); text-shadow: 0 0 .5em rgba(229,23,63,.6); }
+.glow-pumpkin { color: var(--pumpkin); text-shadow: 0 0 .5em rgba(255,122,26,.55); }
+.muted { color: var(--muted); }
+.hidden { display: none !important; }
+
+/* glitch text: set data-text equal to the text content */
+.glitch { position: relative; display: inline-block; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; overflow: hidden; }
+.glitch::before { color: var(--blood); transform: translate(-2px, 0); clip-path: inset(0 0 60% 0); animation: gl1 3.2s infinite steps(1); }
+.glitch::after { color: #19e6ff; transform: translate(2px, 0); clip-path: inset(55% 0 0 0); animation: gl2 2.7s infinite steps(1); }
+@keyframes gl1 { 0%,92%,100% { clip-path: inset(0 0 100% 0); } 93% { clip-path: inset(10% 0 55% 0); } 95% { clip-path: inset(60% 0 10% 0); } 97% { clip-path: inset(30% 0 40% 0); } }
+@keyframes gl2 { 0%,88%,100% { clip-path: inset(100% 0 0 0); } 89% { clip-path: inset(40% 0 30% 0); } 92% { clip-path: inset(5% 0 80% 0); } 96% { clip-path: inset(70% 0 5% 0); } }
+
+@keyframes flicker { 0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; } 20%,24%,55% { opacity: .55; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 20px 2px rgba(229,23,63,.5), inset 0 0 20px rgba(229,23,63,.35); } 50% { box-shadow: 0 0 55px 12px rgba(229,23,63,.85), inset 0 0 40px rgba(229,23,63,.6); } }
+@keyframes shake { 0%,100% { transform: translate(0); } 20% { transform: translate(-6px, 2px); } 40% { transform: translate(5px, -3px); } 60% { transform: translate(-4px, -2px); } 80% { transform: translate(4px, 3px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+.cursor { display: inline-block; width: .55em; height: 1em; background: var(--green); vertical-align: -.12em; animation: blink 1s steps(1) infinite; }
+
+/* generic controls */
+.btn {
+  background: var(--panel2); border: 1px solid var(--line); padding: .55em 1em; border-radius: 4px;
+  letter-spacing: .04em; transition: border-color .12s, box-shadow .12s, transform .05s;
+}
+.btn:hover { border-color: var(--green-dim); box-shadow: 0 0 10px rgba(61,255,110,.2); }
+.btn:active { transform: translateY(1px); }
+.btn.go { border-color: var(--green-dim); color: var(--green); }
+.btn.bad { border-color: var(--blood-dim); color: var(--blood); }
+.btn.warn { border-color: #7a4a10; color: var(--pumpkin); }
+.btn:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
+.field {
+  background: #060d0b; border: 1px solid var(--line); border-radius: 4px; padding: .7em .8em; width: 100%;
+  outline: none;
+}
+.field:focus { border-color: var(--green-dim); box-shadow: 0 0 12px rgba(61,255,110,.18); }
+.tag { font-size: .72em; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.tag::before { content: '# '; color: var(--green-dim); }

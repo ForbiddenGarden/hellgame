@@ -1,0 +1,12 @@
+{
+  "name": "hellgame",
+  "version": "0.1.0",
+  "description": "$hellgame: hacker jeopardy for a haunted Halloween meetup",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/"
+  },
+  "engines": { "node": ">=18" }
+}

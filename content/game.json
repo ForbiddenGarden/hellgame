@@ -1,0 +1,393 @@
+{
+ "title": "$hellgame",
+ "rounds": [
+  {
+   "name": "ROUND 1: THE CRYPT",
+   "categories": [
+    {
+     "name": "HACKER MOVIES",
+     "clues": [
+      {
+       "value": 200,
+       "clue": "In Jurassic Park, Lex shouts \"It's a ___ system! I know this!\" while navigating a 3D file browser.",
+       "answer": "UNIX"
+      },
+      {
+       "value": 400,
+       "clue": "Zero Cool, Crash Override and Acid Burn are hackers in this 1995 cult classic.",
+       "answer": "Hackers"
+      },
+      {
+       "value": 600,
+       "clue": "A teenager nearly starts World War III by playing \"Global Thermonuclear War\" with this 1983 film's NORAD supercomputer, the WOPR.",
+       "answer": "WarGames"
+      },
+      {
+       "value": 800,
+       "clue": "In this 1992 film, a black box that cracks all encryption is chased by a team of pentesters; the villain's company name, \"Setec Astronomy\", is an anagram of \"too many secrets\".",
+       "answer": "Sneakers"
+      },
+      {
+       "value": 1000,
+       "clue": "In Hackers, the supercomputer \"The Gibson\" is a nod to this author, who coined the term \"cyberspace\" in his novel Neuromancer.",
+       "answer": "William Gibson"
+      }
+     ]
+    },
+    {
+     "name": "PORTS & PROTOCOLS",
+     "clues": [
+      {
+       "value": 200,
+       "clue": "Web traffic you can trust (hopefully) travels on this port number.",
+       "answer": "443",
+       "note": "HTTPS"
+      },
+      {
+       "value": 400,
+       "clue": "Port 22 is where you'll find this protocol, which also happens to be our group's name.",
+       "answer": "SSH",
+       "note": "Secure Shell"
+      },
+      {
+       "value": 600,
+       "clue": "Ping uses this protocol, which rides directly on IP with no ports at all; an \"echo request\" is its type 8.",
+       "answer": "ICMP"
+      },
+      {
+       "value": 800,
+       "clue": "Windows Remote Desktop listens on this port by default.",
+       "answer": "3389",
+       "note": "Also accept RDP"
+      },
+      {
+       "value": 1000,
+       "clue": "Port 445 carries this file-sharing protocol, the one EternalBlue exploited to spread WannaCry.",
+       "answer": "SMB",
+       "note": "Server Message Block / CIFS"
+      }
+     ]
+    },
+    {
+     "name": "SLASHER SEASON",
+     "clues": [
+      {
+       "value": 200,
+       "clue": "Michael Myers stalks Laurie Strode in Haddonfield, Illinois, in this 1978 John Carpenter classic.",
+       "answer": "Halloween"
+      },
+      {
+       "value": 400,
+       "clue": "This 1984 film introduced a dream-invading killer with a glove of razor blades.",
+       "answer": "A Nightmare on Elm Street"
+      },
+      {
+       "value": 600,
+       "clue": "In the opening of 1996's Scream, a caller asks Drew Barrymore this question about movies.",
+       "answer": "What's your favorite scary movie?"
+      },
+      {
+       "value": 800,
+       "clue": "Three film students vanish in the Maryland woods hunting a local legend in this 1999 found-footage hit.",
+       "answer": "The Blair Witch Project"
+      },
+      {
+       "value": 1000,
+       "clue": "In the original 1980 Friday the 13th, the killer turns out to be this person, not Jason.",
+       "answer": "Mrs. Voorhees",
+       "note": "Pamela Voorhees, Jason's mother"
+      }
+     ]
+    },
+    {
+     "name": "ACRONYM APOCALYPSE",
+     "clues": [
+      {
+       "value": 200,
+       "clue": "DDoS stands for this.",
+       "answer": "Distributed Denial of Service"
+      },
+      {
+       "value": 400,
+       "clue": "Every vulnerability gets one of these IDs, like CVE-2021-44228. CVE stands for this.",
+       "answer": "Common Vulnerabilities and Exposures"
+      },
+      {
+       "value": 600,
+       "clue": "Cross-Site Scripting is abbreviated XSS to avoid confusion with this three-letter web styling technology.",
+       "answer": "CSS",
+       "note": "Cascading Style Sheets"
+      },
+      {
+       "value": 800,
+       "clue": "SIEM, the tool that drowns analysts in alerts, stands for this.",
+       "answer": "Security Information and Event Management"
+      },
+      {
+       "value": 1000,
+       "clue": "RFC 1149, an April Fools' standard, describes carrying IP datagrams on these animals.",
+       "answer": "Pigeons",
+       "note": "Avian carriers (IPoAC)"
+      }
+     ]
+    },
+    {
+     "name": "THE ARSENAL",
+     "clues": [
+      {
+       "value": 200,
+       "clue": "This \"Swiss Army knife\" of networking, abbreviated nc, opens sockets and pipes shells.",
+       "answer": "netcat"
+      },
+      {
+       "value": 400,
+       "clue": "Created by Fyodor, this scanner maps hosts and open ports.",
+       "answer": "Nmap"
+      },
+      {
+       "value": 600,
+       "clue": "This password cracker shares its name with a Victorian-era London killer.",
+       "answer": "John the Ripper",
+       "note": "Jack the Ripper joke"
+      },
+      {
+       "value": 800,
+       "clue": "This packet sniffer was called Ethereal until a 2006 rename.",
+       "answer": "Wireshark"
+      },
+      {
+       "value": 1000,
+       "clue": "Kali Linux is the successor to this distro, whose name suggests a retreat.",
+       "answer": "BackTrack"
+      }
+     ]
+    },
+    {
+     "name": "MALWARE HALL OF SHAME",
+     "clues": [
+      {
+       "value": 200,
+       "clue": "In 2000, the ILOVEYOU worm spread worldwide using this common communication method.",
+       "answer": "Email"
+      },
+      {
+       "value": 400,
+       "clue": "In 1988, this Cornell grad student released a worm that hit an estimated 10% of the early internet.",
+       "answer": "Robert Tappan Morris",
+       "note": "The Morris worm"
+      },
+      {
+       "value": 600,
+       "clue": "Discovered in 2010, this worm sabotaged Iranian uranium centrifuges.",
+       "answer": "Stuxnet"
+      },
+      {
+       "value": 800,
+       "clue": "In May 2017 this ransomware worm crippled the UK's NHS and demanded Bitcoin.",
+       "answer": "WannaCry"
+      },
+      {
+       "value": 1000,
+       "clue": "This 2016 botnet that took down Dyn's DNS is named for the Japanese word for \"future\".",
+       "answer": "Mirai"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ROUND 2: THE DEEP WEB",
+   "categories": [
+    {
+     "name": "CRYPT-OGRAPHY",
+     "clues": [
+      {
+       "value": 400,
+       "clue": "Julius Caesar shifted by 3; the internet's favorite version shifts by this many.",
+       "answer": "13",
+       "note": "ROT13"
+      },
+      {
+       "value": 800,
+       "clue": "AES encrypts data in blocks of this many bits.",
+       "answer": "128"
+      },
+      {
+       "value": 1200,
+       "clue": "Polish mathematicians were the first to break this WWII German cipher machine.",
+       "answer": "Enigma"
+      },
+      {
+       "value": 1600,
+       "clue": "WEP was broken largely because it misused this stream cipher.",
+       "answer": "RC4"
+      },
+      {
+       "value": 2000,
+       "clue": "Bruce Schneier designed this free, unpatented 1993 block cipher as a replacement for DES.",
+       "answer": "Blowfish"
+      }
+     ]
+    },
+    {
+     "name": "THE MONSTER MASH",
+     "clues": [
+      {
+       "value": 400,
+       "clue": "In Mary Shelley's novel, \"Frankenstein\" is actually the name of this character, not the monster.",
+       "answer": "Victor Frankenstein",
+       "note": "The scientist"
+      },
+      {
+       "value": 800,
+       "clue": "Count Dracula arrives in England aboard the Demeter and comes ashore at this Yorkshire seaside town.",
+       "answer": "Whitby"
+      },
+      {
+       "value": 1200,
+       "clue": "The 1922 silent film Nosferatu was an unauthorized adaptation of this novel.",
+       "answer": "Dracula"
+      },
+      {
+       "value": 1600,
+       "clue": "This Hungarian-born actor starred in Universal's 1931 Dracula.",
+       "answer": "Bela Lugosi"
+      },
+      {
+       "value": 2000,
+       "clue": "Boris Karloff's 1932 mummy is this ancient Egyptian priest.",
+       "answer": "Imhotep"
+      }
+     ]
+    },
+    {
+     "name": "STEPHEN KING",
+     "clues": [
+      {
+       "value": 400,
+       "clue": "Jack Torrance goes mad as caretaker of the Overlook Hotel in this novel.",
+       "answer": "The Shining"
+      },
+      {
+       "value": 800,
+       "clue": "Pennywise haunts the town of Derry, Maine, in this novel.",
+       "answer": "It"
+      },
+      {
+       "value": 1200,
+       "clue": "This 1974 first novel features a telekinetic teen and a very bad prom.",
+       "answer": "Carrie"
+      },
+      {
+       "value": 1600,
+       "clue": "A possessed 1958 Plymouth Fury is the title character of this 1983 novel.",
+       "answer": "Christine"
+      },
+      {
+       "value": 2000,
+       "clue": "King wrote Thinner and The Regulators under this pen name.",
+       "answer": "Richard Bachman"
+      }
+     ]
+    },
+    {
+     "name": "90s KIDS' NIGHTMARES",
+     "clues": [
+      {
+       "value": 400,
+       "clue": "R.L. Stine's kid-horror book series, which also became a 90s TV show, goes by this name.",
+       "answer": "Goosebumps"
+      },
+      {
+       "value": 800,
+       "clue": "Tim Burton's The Nightmare Before Christmas stars this skeletal Pumpkin King of Halloween Town.",
+       "answer": "Jack Skellington"
+      },
+      {
+       "value": 1200,
+       "clue": "In Ghostbusters, Gozer takes the form of this giant mascot.",
+       "answer": "The Stay Puft Marshmallow Man"
+      },
+      {
+       "value": 1600,
+       "clue": "In Hocus Pocus, Sarah Jessica Parker plays Sarah Sanderson; Bette Midler plays this lead sister.",
+       "answer": "Winifred"
+      },
+      {
+       "value": 2000,
+       "clue": "On \"Are You Afraid of the Dark?\", the kids tell stories around a campfire as members of this club.",
+       "answer": "The Midnight Society"
+      }
+     ]
+    },
+    {
+     "name": "EXPLOITS & VULNS",
+     "clues": [
+      {
+       "value": 400,
+       "clue": "Typing ' OR '1'='1' -- into a login box is the classic example of this attack.",
+       "answer": "SQL injection"
+      },
+      {
+       "value": 800,
+       "clue": "This 2014 OpenSSL bug, named after an organ, leaked server memory.",
+       "answer": "Heartbleed"
+      },
+      {
+       "value": 1200,
+       "clue": "This 2021 flaw in a ubiquitous Java logging library, CVE-2021-44228, got this nickname.",
+       "answer": "Log4Shell"
+      },
+      {
+       "value": 1600,
+       "clue": "Leaked by the Shadow Brokers in 2017, this NSA exploit targeted SMBv1 and powered WannaCry.",
+       "answer": "EternalBlue"
+      },
+      {
+       "value": 2000,
+       "clue": "Disclosed in 2018 alongside Meltdown, this speculative-execution CPU flaw shares its name with a ghost.",
+       "answer": "Spectre"
+      }
+     ]
+    },
+    {
+     "name": "HARDWARE & WIRELESS",
+     "clues": [
+      {
+       "value": 400,
+       "clue": "This dolphin-themed pocket multitool, popular with hackers, pokes at sub-GHz radio, RFID, NFC and infrared.",
+       "answer": "Flipper Zero"
+      },
+      {
+       "value": 800,
+       "clue": "This four-letter standard lets hardware hackers debug chips through pins like TCK and TMS.",
+       "answer": "JTAG"
+      },
+      {
+       "value": 1200,
+       "clue": "Hak5's rogue access point is named after this tropical fruit.",
+       "answer": "Pineapple",
+       "note": "WiFi Pineapple"
+      },
+      {
+       "value": 1600,
+       "clue": "This NSA codename covers spying on, and shielding against, compromising electromagnetic emissions.",
+       "answer": "TEMPEST"
+      },
+      {
+       "value": 2000,
+       "clue": "The 2017 KRACK attack targeted this WPA2 exchange, which has this many steps.",
+       "answer": "Four",
+       "note": "The four-way handshake"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "final": {
+  "category": "THE FIRST BUG",
+  "clue": "In 1947, operators of the Harvard Mark II taped a dead moth into the logbook as the \"first actual case of bug being found\"; this Navy rear admiral, who worked on the machine's team, is credited with popularizing the term \"debugging\".",
+  "answer": "Grace Hopper"
+ }
+}

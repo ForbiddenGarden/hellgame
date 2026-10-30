@@ -1,0 +1,21 @@
+{
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/handler?p=:path*" },
+    { "source": "/", "destination": "/play.html" },
+    { "source": "/board", "destination": "/board.html" },
+    { "source": "/host", "destination": "/host.html" }
+  ],
+  "functions": { "api/handler.js": { "includeFiles": "content/**", "maxDuration": 10 } },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'" }
+      ]
+    }
+  ]
+}

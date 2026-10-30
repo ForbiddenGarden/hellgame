@@ -1,0 +1,6 @@
+data/
+test/
+tools/
+node_modules/
+Dockerfile
+*.log
