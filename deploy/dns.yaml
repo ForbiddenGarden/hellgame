@@ -1,0 +1,34 @@
+# Adds CNAME hellgame.sasquatch.sh -> Vercel. GoDaddy's DNS adapter treats `domain`
+# as the zone, so the zone is sasquatch.sh and the record name is the subdomain.
+# Run: auto-squirrel deploy/dns.yaml --only dns            (dry run)
+#      auto-squirrel deploy/dns.yaml --only dns --apply
+project_name: "hellgame"
+domain: "sasquatch.sh"
+registrar: "godaddy"      # unused (--only dns)
+dns_provider: "godaddy"
+years: 1
+nameservers: null
+registrant_contact:       # unused (registrar step not run)
+  first_name: "N/A"
+  last_name: "N/A"
+  organization: "SSH"
+  address1: "N/A"
+  city: "N/A"
+  state: "WA"
+  postal_code: "00000"
+  country: "US"
+  phone: "+1.0000000000"
+  email: "nelsonkauley@gmail.com"
+  privacy_protect: true
+dns_records:
+  - type: "CNAME"
+    name: "hellgame"
+    value: "cname.vercel-dns.com"
+github:
+  owner: "ForbiddenGarden"
+  repo: "hellgame"
+  private: true
+  template: null
+  local_path: "/home/nelson/projects/($)hellgame"
+vercel:
+  project_name: "hellgame"
