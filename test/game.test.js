@@ -175,6 +175,34 @@ test('every generated challenge is solvable with its own secret', () => {
   }
 });
 
+test('resetGame keeps teams and players, zeroes everything else', () => {
+  const { g, a, ta } = setup();
+  g.host('start'); g.host('score', { teamId: ta, delta: 500 });
+  g.host('resetGame');
+  const v = g.boardView(true);
+  assert.equal(v.phase, 'lobby');
+  assert.equal(v.teams.length, 2);
+  assert.ok(v.teams.every((t) => t.score === 0));
+  assert.equal(v.players, 2);
+  assert.ok(g.playerView(a));
+  assert.equal(g.host('start').ok, true);
+});
+
+test('opt-in captchas are off by default, can be enabled, and are solvable', () => {
+  const { g } = setup();
+  assert.ok(!g.enabledCaptchas().includes('reverse'));
+  for (const k of challenges.OPT_IN) assert.equal(g.host('captcha', { kind: k, on: true }).ok, true);
+  assert.equal(g.host('captcha', { kind: 'nope', on: true }).ok, false);
+  for (const k of challenges.OPT_IN) for (let i = 0; i < 50; i++) {
+    const ch = challenges.make(Math.random, null, [k]);
+    assert.equal(ch.kind, k);
+    const ans = ch.pub.type === 'text' ? ch.secret.answer : true;
+    assert.ok(challenges.check(ch, ans, 10000), k);
+  }
+  for (const k of challenges.NAMES) g.host('captcha', { kind: k, on: false }); // last one must stay on
+  assert.ok(g.enabledCaptchas().length >= 1);
+});
+
 test('full game flows through round 2 and final to over', () => {
   const { g, clock, a, b, ta, tb } = setup();
   g.host('start'); g.s.dd = {};

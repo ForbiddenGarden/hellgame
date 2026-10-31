@@ -39,6 +39,9 @@ function topBar() {
     h('div', { class: 'seg' }, h('label', {}, 'chaos'), chaos),
     h('div', { class: 'seg' }, h('label', {}, 'buzz secs'), secs),
     h('div', { class: 'seg' }, h('button', { class: 'btn' + (v.bloodMoon ? ' on-red' : ''), onclick: () => act('bloodMoon'), title: 'Next clue: EVERY player must beat a troll captcha before their buzz counts' }, '☾ blood moon')),
+    h('div', { class: 'seg' },
+      h('button', { class: 'btn', title: 'Zero the scores and go back to the lobby. Teams and players stay.', onclick: () => confirm('Reset scores and the board? Teams and players are kept.') && act('resetGame') }, '↺ reset board'),
+      h('button', { class: 'btn bad', title: 'Wipe teams, players, scores. Everyone must rejoin.', onclick: () => confirm('WIPE EVERYTHING (teams, players, scores)? Phones will have to rejoin.') && act('restart') }, '✕ wipe all')),
     h('div', { class: 'seg' }, h('a', { href: '/board', target: '_blank', rel: 'noopener' }, 'open board ↗')),
     h('div', { class: 'seg', style: 'margin-left:auto' }, h('span', { class: 'muted' }, `${v.players} players`)),
   );
@@ -133,6 +136,12 @@ function overPanel() {
     h('div', { class: 'actions' }, h('button', { class: 'btn bad', onclick: () => confirm('Wipe everything (teams, players, scores)?') && act('restart') }, 'RESET EVERYTHING'))];
 }
 
+function captchaPanel() {
+  const list = view.captchas || [];
+  return h('div', { class: 'panel' }, h('h3', {}, 'troll captchas'),
+    h('div', { class: 'row' }, list.map((c) => h('button', { class: 'btn' + (c.on ? ' on' : ''), title: c.optIn ? 'extra captcha (off by default)' : 'standard captcha', onclick: () => act('captcha', { kind: c.kind, on: !c.on }) }, (c.optIn ? '★ ' : '') + c.kind))));
+}
+
 function teamsPanel() {
   const v = view;
   return h('div', { class: 'panel' }, h('h3', {}, 'teams'), v.teams.length ? v.teams.map((t) => {
@@ -163,7 +172,7 @@ function render() {
   app.replaceChildren(
     topBar(),
     h('div', { class: 'main' }, main),
-    h('div', { class: 'side' }, teamsPanel()),
+    h('div', { class: 'side' }, teamsPanel(), captchaPanel()),
     h('div', { class: 'logbox', id: 'log' }, (v.log || []).slice().reverse().map((l) => h('div', {}, h('b', {}, new Date(l.t).toLocaleTimeString()), l.msg))),
   );
   document.querySelectorAll('[data-keep]').forEach((el) => { const k = keep[el.dataset.keep]; if (k) { if (k.v) el.value = k.v; if (k.f) el.focus(); } });
