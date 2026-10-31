@@ -6,6 +6,7 @@ Sibling project: `../lcl_sec_grp` (sasquatch.sh).
 - `local-server.js`: zero-dep Node http + SSE; JSON persistence to `data/state.json`
 - `lib/game.js`: whole game state machine (host actions are `h_*`); `lib/challenges.js`: troll captchas
 - `public/`: `play.html` (`/`), `board.html`, `host.html`; shared `js/common.js` (API, SSE, WebAudio)
+  `js/sprites.js`: pixel-art sprites (text grids → canvas data URLs) + `HGFX` effects on the board (`#fx` layer).
 - `content/game.json`: clues. Answers must never be sent to board/player views before reveal (tested)
 - Run `npm test` after touching `lib/`. Palette matches the SSH site, plus blood red / pumpkin.
 - CSP forbids inline scripts: keep JS in files.

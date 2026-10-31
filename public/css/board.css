@@ -29,7 +29,7 @@ html, body { height: 100%; overflow: hidden; }
 .cat { background: linear-gradient(#0e2118, #081410); border: .12vw solid var(--green-dim); display: flex; align-items: center; justify-content: center; text-align: center; padding: .4vw .8vw; font-weight: 800; color: var(--green); font-size: 1.55vw; line-height: 1.15; text-shadow: 0 0 .5em rgba(61,255,110,.5); text-transform: uppercase; }
 .tile { background: #0a1a2e linear-gradient(#0d2a1c, #07150f); border: .12vw solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 3.6vw; font-weight: 900; color: var(--pumpkin); text-shadow: 0 0 .4em rgba(255,122,26,.6); position: relative; overflow: hidden; }
 .tile.used { background: #050807; border-color: #0c1512; color: #1a2b25; text-shadow: none; font-size: 2.4vw; }
-.tile.used::after { content: '☠'; }
+.tile.used::after { content: ''; width: 36%; height: 36%; background: var(--skull) center / contain no-repeat; image-rendering: pixelated; opacity: .35; }
 .tile.used span { display: none; }
 .tile.hot { animation: shake .4s; }
 
@@ -87,3 +87,32 @@ html, body { height: 100%; overflow: hidden; }
 #toast b { color: var(--blood); }
 body.moon { box-shadow: inset 0 0 12vw rgba(229,23,63,.55); }
 body.moon #top .brand { animation: blink 1s steps(1) infinite; }
+
+/* pixel sprites */
+#fx { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+.spr { position: absolute; background-repeat: no-repeat; image-rendering: pixelated; }
+.scene { position: absolute; inset: 0; }
+.scene .ground { bottom: 0; }
+.spr.flap { animation: fxFlap .35s steps(1) infinite; }
+@keyframes fxFlap { 0% { background-position-x: 0; } 50% { background-position-x: var(--sheet); } }
+.spr.drift { animation: fxBob 3.2s ease-in-out infinite, fxSway 9s ease-in-out infinite; opacity: .85; }
+@keyframes fxBob { 0%,100% { margin-top: 0; } 50% { margin-top: -1.2vw; } }
+@keyframes fxSway { 0%,100% { translate: 0 0; } 50% { translate: 2.4vw 0; } }
+.hang { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; transform-origin: top center; animation: fxSwing 4s ease-in-out infinite; }
+.hang i { display: block; width: .08vw; background: #8a8a9a; opacity: .7; }
+.hang .spr { position: static; }
+@keyframes fxSwing { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+.spr.fly { left: 0; }
+@keyframes fxFlyR { from { transform: translate(-10vw, 0); } 50% { transform: translate(50vw, -3vw); } to { transform: translate(112vw, 2vw); } }
+@keyframes fxFlyL { from { transform: translate(112vw, 0) scaleX(-1); } 50% { transform: translate(50vw, -3vw) scaleX(-1); } to { transform: translate(-10vw, 2vw) scaleX(-1); } }
+.spr.rise { bottom: -8vw; animation: fxRise 2.4s ease-out forwards; }
+@keyframes fxRise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 60% { transform: translateY(-55vh); opacity: 1; } 100% { transform: translateY(-80vh) rotate(8deg); opacity: 0; } }
+.spr.drop { top: -6vw; animation: fxDrop 2.2s ease-in forwards; }
+@keyframes fxDrop { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(95vh) rotate(180deg); opacity: .3; } }
+.spr.stamp { animation: fxStamp 1.6s ease-out forwards; }
+@keyframes fxStamp { 0% { transform: scale(4); opacity: 0; } 20% { transform: scale(1); opacity: 1; } 80% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
+.spr.zoom { animation: fxZoom 2.4s ease-out forwards; }
+@keyframes fxZoom { 0% { transform: scale(0) rotate(-20deg); opacity: 0; } 25% { transform: scale(1) rotate(5deg); opacity: .95; } 80% { opacity: .95; } 100% { transform: scale(1.2); opacity: 0; } }
+.spr.fall { top: -8vw; animation-name: fxFall; animation-timing-function: linear; animation-fill-mode: forwards; }
+@keyframes fxFall { to { transform: translateY(115vh) rotate(300deg); } }
+@media (prefers-reduced-motion: reduce) { .spr { animation: none !important; } }

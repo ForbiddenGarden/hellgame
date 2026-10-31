@@ -1,7 +1,7 @@
 'use strict';
 const { h, money } = HG;
 const $ = (id) => document.getElementById(id);
-let prev = null, lastKey = '', lastCurseN = 0, view = null;
+let prev = null, lastKey = '', lastCurseN = 0, view = null, lastPhase = null;
 
 // ---------- sound gate ----------
 $('sound').addEventListener('click', () => { HGAudio.init(); $('sound').classList.add('hidden'); if (view) syncAudio(view, null); });
@@ -18,6 +18,9 @@ function render(v) {
   const enter = key !== lastKey;
   lastKey = key;
   document.body.classList.toggle('moon', !!v.bloodMoon);
+  document.documentElement.style.setProperty('--skull', `url(${HGFX.skullUrl()})`);
+  if (v.phase !== lastPhase) { lastPhase = v.phase; HGFX.scene(v.phase); }
+  HGFX.setQuiet(!!v.cur && ['armed', 'answering'].includes(v.cur.state));
   renderTop(v);
   const stage = $('stage');
   stage.replaceChildren(screenFor(v, enter));
@@ -165,7 +168,7 @@ function renderScores(v) {
 
 // ---------- sound + toast reactions ----------
 function syncAudio(v, p) {
-  if (!HGAudio.ready()) return;
+  // audio calls no-op until the sound gate is clicked; sprite effects must fire regardless
   const c = v.cur, pc = p && p.cur;
   const sum = (x) => x.teams.reduce((a, t) => a + t.score, 0);
   if (!p) { HGAudio.drone(v.phase === 'final' && v.final && v.final.state !== 'judge'); return; }
@@ -174,17 +177,18 @@ function syncAudio(v, p) {
     if (c.state === 'armed') HGAudio.arm();
     if (c.state === 'answering' && pc.state === 'armed') HGAudio.buzz();
     if (c.state === 'answering' && pc.state === 'wager') HGAudio.arm();
+    if (c.state === 'wager' && pc.state !== 'wager') HGFX.burst('dd');
     if (c.state === 'revealed') {
-      if (c.timedOut) HGAudio.timeout();
-      else if (c.flash && c.flash.type === 'correct') HGAudio.correct();
+      if (c.timedOut) { HGAudio.timeout(); HGFX.burst('bad'); }
+      else if (c.flash && c.flash.type === 'correct') { HGAudio.correct(); HGFX.burst('good'); }
       else HGAudio.reveal();
     }
   }
-  if (c && pc && c.state === pc.state && c.state === 'answering' && sum(v) < sum(p)) HGAudio.wrong();
+  if (c && pc && c.state === pc.state && c.state === 'answering' && sum(v) < sum(p)) { HGAudio.wrong(); HGFX.burst('bad'); }
   if (c && pc && c.state === 'armed' && pc.state === 'answering') HGAudio.wrong(); // wrong -> re-armed
   if (v.phase === 'final' || v.phase === 'over') {
     HGAudio.drone(v.phase === 'final' && v.final.state !== 'judge');
-    if (v.phase === 'over' && p.phase !== 'over') { HGAudio.fanfare(); bats(); }
+    if (v.phase === 'over' && p.phase !== 'over') { HGAudio.fanfare(); HGFX.burst('over'); }
     if (v.final && p.final && v.final.state === 'answer' && p.final.state !== 'answer') HGAudio.arm();
     if (v.final && p.final && v.final.state === 'judge' && v.final.reveals.length !== p.final.reveals.length) HGAudio.reveal();
     if (v.final && p.final && v.final.state === 'judge') {
@@ -192,8 +196,8 @@ function syncAudio(v, p) {
       if (newJ > oldJ) (v.final.reveals.find((r, i) => i === newJ - 1) || {}).correct ? HGAudio.correct() : HGAudio.wrong();
     }
   } else HGAudio.drone(false);
-  if (v.lastCurse && v.lastCurse.n !== lastCurseN) { lastCurseN = v.lastCurse.n; HGAudio.curse(); showToast(v.lastCurse); }
-  if (v.bloodMoon && !p.bloodMoon) HGAudio.thunder();
+  if (v.lastCurse && v.lastCurse.n !== lastCurseN) { lastCurseN = v.lastCurse.n; HGAudio.curse(); showToast(v.lastCurse); HGFX.burst('curse'); }
+  if (v.bloodMoon && !p.bloodMoon) { HGAudio.thunder(); HGFX.burst('moon'); }
 }
 
 function showToast(cu) {
@@ -202,13 +206,6 @@ function showToast(cu) {
   t.classList.remove('hidden');
   clearTimeout(showToast.t);
   showToast.t = setTimeout(() => t.classList.add('hidden'), 3500);
-}
-
-function bats() {
-  for (let i = 0; i < 24; i++) {
-    const b = h('div', { class: 'bat', style: `left:${Math.random() * 100}vw;animation-duration:${4 + Math.random() * 5}s;animation-delay:${Math.random() * 3}s` }, ['🦇', '🎃', '👻', '💀'][i % 4]);
-    document.body.append(b);
-  }
 }
 
 // ---------- timer bar ----------
