@@ -198,24 +198,24 @@
     };
     if (phase === 'lobby') {
       // graveyard along the bottom
-      for (let i = 0; i < 12; i++) {
-        const e = sprite(i === 6 ? 'cat' : i === 10 ? 'coffin' : i % 4 === 1 ? 'pumpkin' : i % 5 === 3 ? 'hat' : 'tomb', 0.34);
+      ['tomb', 'pumpkin', 'cat', 'hat', 'coffin', 'tomb'].forEach((n, i) => {
+        const e = sprite(n, 0.34);
         e.classList.add('ground');
-        e.style.left = (i * 8.4 + rnd(0, 2)) + 'vw';
+        e.style.left = (i * 16.5 + rnd(1, 4)) + 'vw';
         sceneEl.append(e);
-      }
-      [[6, 14], [86, 8], [15, 10]].forEach(([x, y], i) => {
+      });
+      [[6, 14], [86, 8]].forEach(([x, y], i) => {
         const g = sprite('ghost', 0.4, 'drift');
         g.style.left = x + 'vw'; g.style.top = (18 + y * 2 + i * 6) + 'vh';
         g.style.animationDuration = rnd(7, 11) + 's, ' + rnd(14, 22) + 's';
         g.style.animationDelay = (-rnd(0, 8)) + 's';
         sceneEl.append(g);
       });
-      hang(3, 9, 0.28); hang(92, 14, 0.3); hang(47, 4, 0.22);
+      hang(3, 9, 0.28); hang(92, 14, 0.3);
     } else if (phase === 'over') {
-      for (let i = 0; i < 6; i++) {
-        const g = sprite(['ghost', 'pumpkin', 'cat', 'coffin'][i % 4], 0.5, 'drift');
-        g.style.left = (5 + i * 17) + 'vw'; g.style.top = (62 + (i % 3) * 8) + 'vh';
+      for (let i = 0; i < 3; i++) {
+        const g = sprite(['ghost', 'cat', 'coffin'][i], 0.5, 'drift');
+        g.style.left = (12 + i * 34) + 'vw'; g.style.top = (62 + (i % 3) * 8) + 'vh';
         g.style.animationDelay = (-i) + 's';
         sceneEl.append(g);
       }
@@ -229,24 +229,24 @@
     const b = sprite('bat', opts.scale || rnd(0.28, 0.42), 'fly');
     const ltr = Math.random() < 0.5;
     b.style.top = (opts.top != null ? opts.top : rnd(8, 78)) + 'vh';
-    b.style.animationName = ltr ? 'fxFlyR' : 'fxFlyL';
-    b.style.animationDuration = (opts.dur || rnd(5, 8)) + 's';
-    b.style.animationDelay = (opts.delay || 0) + 's';
-    add(b, ((opts.dur || 8) + (opts.delay || 0)) * 1000 + 500);
+    const dur = opts.dur || rnd(5, 8), delay = opts.delay || 0;
+    // two animations: the flight path (linear, once) and the wing flap (steps, forever)
+    b.style.animation = `${ltr ? 'fxFlyR' : 'fxFlyL'} ${dur}s linear ${delay}s both, fxFlap .35s steps(1) infinite`;
+    add(b, (dur + delay) * 1000 + 500);
   }
 
   function burst(kind) {
     if (!fx()) return;
     if (kind === 'good') {
       // pumpkins and ghosts hop up from the floor
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < 5; i++) {
         const e = sprite(i % 3 === 0 ? 'ghost' : 'pumpkin', rnd(0.3, 0.5), 'rise');
         e.style.left = rnd(3, 92) + 'vw';
         e.style.animationDelay = rnd(0, 0.6) + 's';
         add(e, 3200);
       }
     } else if (kind === 'bad') {
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 4; i++) {
         const e = sprite('skull', rnd(0.3, 0.45), 'drop');
         e.style.left = rnd(4, 92) + 'vw';
         e.style.animationDelay = rnd(0, 0.7) + 's';
@@ -257,17 +257,14 @@
       e.style.left = '44vw'; e.style.top = '30vh';
       add(e, 1800);
     } else if (kind === 'moon') {
-      for (let i = 0; i < 16; i++) flyBat({ delay: rnd(0, 3), dur: rnd(3, 6) });
+      for (let i = 0; i < 8; i++) flyBat({ delay: rnd(0, 3), dur: rnd(3, 6) });
     } else if (kind === 'dd') {
       const e = sprite('ghost', 1.4, 'zoom');
-      e.style.left = '8vw'; e.style.top = '30vh';
+      e.style.left = '42vw'; e.style.top = '30vh';
       add(e, 2600);
-      const e2 = sprite('ghost', 1.4, 'zoom');
-      e2.style.left = '78vw'; e2.style.top = '30vh'; e2.style.animationDelay = '.2s';
-      add(e2, 2800);
     } else if (kind === 'over') {
       const list = ['bat', 'ghost', 'pumpkin', 'skull', 'hat', 'cat', 'coffin'];
-      for (let i = 0; i < 28; i++) {
+      for (let i = 0; i < 14; i++) {
         const e = sprite(list[i % list.length], rnd(0.3, 0.5), 'fall');
         e.style.left = rnd(1, 95) + 'vw';
         e.style.animationDuration = rnd(4, 9) + 's';
