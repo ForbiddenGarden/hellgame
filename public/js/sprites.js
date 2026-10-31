@@ -6,7 +6,7 @@
   const PAL = {
     w: '#e9e6d6', s: '#9fb0b8', k: '#04070a', o: '#ff7a1a', O: '#b8480a', g: '#3dff6e', G: '#1f9a43',
     b: '#8b5cd6', B: '#5a3a96', r: '#e5173f', p: '#7a3fd0', P: '#4b2490', y: '#ffd23f', t: '#6e8c7d', T: '#3d5a4d',
-    c: '#c9c2d8',
+    c: '#c9c2d8', m: '#2b2b3d', M: '#55557a', q: '#ff8fb1', n: '#7a4a26', N: '#3f2813',
   };
 
   const ART = {
@@ -94,6 +94,38 @@
       'pppppppppppppp',
       '.PPPPPPPPPPPP.',
     ]],
+    cat: [[
+      '.MM.......MM.',
+      '.MmM.....MmM.',
+      '.MmmMMMMMmmM.',
+      'MmmmmmmmmmmmM',
+      'MmyymmmmmyymM',
+      'MmykmmmmmykmM',
+      'MmmmmmqmmmmmM',
+      '.MmmmmMmmmmM.',
+      '..MmmmmmmmM.M',
+      '.MmmmMmMmmmM.M',
+      '.MmmmmmmmmmM.M',
+      '.MmmmmmmmmmMMM',
+      '.MMMMMMMMMMM..',
+    ]],
+    coffin: [[
+      '...NNNN...',
+      '..NnnnnN..',
+      '.NnnnnnnN.',
+      'NnnnccnnnN',
+      'NnnnccnnnN',
+      'NnnccccnnN',
+      'NnnnccnnnN',
+      'NnnnccnnnN',
+      'NnnnccnnnN',
+      'NnnnnnnnnN',
+      '.NnnnnnnN.',
+      '.NnnnnnnN.',
+      '..NnnnnN..',
+      '..NnnnnN..',
+      '...NNNN...',
+    ]],
     tomb: [[
       '...tttttt...',
       '..tttttttt..',
@@ -167,7 +199,7 @@
     if (phase === 'lobby') {
       // graveyard along the bottom
       for (let i = 0; i < 12; i++) {
-        const e = sprite(i % 4 === 1 ? 'pumpkin' : i % 5 === 3 ? 'hat' : 'tomb', 0.34);
+        const e = sprite(i === 6 ? 'cat' : i === 10 ? 'coffin' : i % 4 === 1 ? 'pumpkin' : i % 5 === 3 ? 'hat' : 'tomb', 0.34);
         e.classList.add('ground');
         e.style.left = (i * 8.4 + rnd(0, 2)) + 'vw';
         sceneEl.append(e);
@@ -182,7 +214,7 @@
       hang(3, 9, 0.28); hang(92, 14, 0.3); hang(47, 4, 0.22);
     } else if (phase === 'over') {
       for (let i = 0; i < 6; i++) {
-        const g = sprite(i % 2 ? 'ghost' : 'pumpkin', 0.5, 'drift');
+        const g = sprite(['ghost', 'pumpkin', 'cat', 'coffin'][i % 4], 0.5, 'drift');
         g.style.left = (5 + i * 17) + 'vw'; g.style.top = (62 + (i % 3) * 8) + 'vh';
         g.style.animationDelay = (-i) + 's';
         sceneEl.append(g);
@@ -234,7 +266,7 @@
       e2.style.left = '78vw'; e2.style.top = '30vh'; e2.style.animationDelay = '.2s';
       add(e2, 2800);
     } else if (kind === 'over') {
-      const list = ['bat', 'ghost', 'pumpkin', 'skull', 'hat'];
+      const list = ['bat', 'ghost', 'pumpkin', 'skull', 'hat', 'cat', 'coffin'];
       for (let i = 0; i < 28; i++) {
         const e = sprite(list[i % list.length], rnd(0.3, 0.5), 'fall');
         e.style.left = rnd(1, 95) + 'vw';
